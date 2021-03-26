@@ -1,0 +1,3 @@
+#cloud-config
+instance-id: somewhere-id-monita
+hostname: autoinstallimg

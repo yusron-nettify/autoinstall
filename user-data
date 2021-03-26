@@ -1,0 +1,39 @@
+#cloud-config
+autoinstall:
+  version: 1
+  identity:
+    hostname: SOMEWHERE-Monita
+    password: $1$jSH3sVEi$lpBB1BBxia5x0W3Ql.Gih1
+    username: nettifyadmin
+  apt:
+    preserve_sources_list: false
+    primary:
+      - arches: [amd64]
+        uri: "http://archive.ubuntu.com/ubuntu/"
+      - arches: [default]
+        uri: "http://ports.ubuntu.com/ubuntu-ports"
+    geoip: true
+  snaps:
+    - name: lxd
+      channel: 4.12/stable
+      classic: false
+  ssh:
+    install-server: yes
+    authorized-keys:
+      - "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAHpx/hfPuWNBAi1cNPOQaCciGtnUIMfzuJkCtOoe2R+kta0hj7n1giLHblYO2+WBf/b7bs6zcL4bzUF66BpLH8thgHreLCv+MzzCOG3dviwOjstDEJoxPn59t1V3GCGN7n2w2yrvnzm2yZhfSPllpDgY3yZPmXxTiAuRLn0r030z1yJiw== onid@slumber"
+    allow-pw:: no
+  packages:
+    - curl
+    - nginx
+    - iptables-persistent
+    - apt-transport-https
+    - p7zip-full
+    - openssh-server
+    - git
+  user-data:
+    disable_root: false 
+  late-commands:
+    - echo 'nettifyadmin ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/nettify
+    - echo 'nettifysystem ALL=(ALL) NOPASSWD:ALL' >> /target/etc/sudoers.d/nettify
+    - sed -ie 's/GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX="net.ifnames=0 ipv6.disable=1 biosdevname=0"/' /target/etc/default/grub
+    - curtin in-target --target=/target update-grub2
