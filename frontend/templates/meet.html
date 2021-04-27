@@ -1,0 +1,29 @@
+<html itemscope itemtype="http://schema.org/Product" prefix="og: http://ogp.me/ns#" xmlns="http://www.w3.org/1999/html">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    </head>
+    <body>
+        <div id=meet class="margin:auto; text-align:center;" allow="camera; microphone; autoplay"></div>
+        <script src="https://jitsimeet.devonid.xyz/external_api.js"></script>
+        <script>
+            const domain = "jitsimeet.devonid.xyz";
+            const options = {
+                roomName: "{{ room_name }}",
+                width: "100%",
+                height: "100%",
+                parentNode: document.querySelector("#meet"),
+                devices: {
+                    audioInput: "HP Webcam HD 2300 Analog Stereo",
+                    audioOutput: "Default",
+                    videoInput: "HP Webcam HD 2300 (03f0:e207)"
+                },
+                userInfo: {
+                    email: "{{ email }}}",
+                    displayName: "{{ displayName }}}"
+                }
+            }
+            const api = new JitsiMeetExternalAPI(domain, options);
+        </script>
+    </body>
+</html>

@@ -11,7 +11,7 @@ front = APIRouter(tags=["control"])
 async def get_control(request: Request):
     return templates.TemplateResponse("control.html", {"request": request})
 
-
+#NOTE: DEPRECATED: Moved to static and serve with python http server
 @front.get("/receiver", response_class=HTMLResponse)
 async def get_receiver(request: Request):
     return templates.TemplateResponse("receiver.html", {"request": request})

@@ -8,26 +8,25 @@ from .models import BannerList, BasicConfig, MeetingConfig, OkResponse
 
 
 apirouter = APIRouter(prefix="/api", tags=["backend"])
-webdir ='/opt/nettify/meet/jitsi-meet/src/web/templates/'
-templates = Jinja2Templates(directory=webdir)
+templates = Jinja2Templates(directory='frontend/templates')
 
 
-@apirouter.get("/starMeeting", response_class=HTMLResponse)
+@apirouter.get("/startMeeting", response_class=HTMLResponse)
 async def start_meeting(request: Request):
     return templates.TemplateResponse("lobby.html", {"request": request})
 
 
 @apirouter.post("/startMeeting", response_class=HTMLResponse)
 async def host_meeting(request: Request, data: MeetingConfig):
-    with open(webdir + 'meeting.j2') as t:
+    with open('frontend/templates/meet.html') as t:
         templ = Template(t.read())
 
     templ.stream(
         room_name=data.meetingRoomName,
         displayName=data.displayName,
         email=data.email
-        ).dump("/opt/nettify/meet/jitsi-meet/src/web/jitsi/meet.html")
-    browser.execute_script("location.href='http://localhost/jitsi/meet.html'")
+        ).dump("frontend/static/meet.html")
+    browser.execute_script("location.href='http://localhost:8000/static/meet.html'")
     
     return templates.TemplateResponse("control.html", {"request": request})
 
