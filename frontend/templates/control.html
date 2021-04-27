@@ -1,5 +1,59 @@
-<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
     <body>
-        <div>Wohohoho</div>
+        <h1 style="text-align: center">Meeting Controll</h1>
+        <div class="container" style="margin-left: auto; margin-right: auto;">
+            <div class="row" style="margin: auto; border: 10px;">
+                <div class="col">
+                <button type="button" class="btn btn-primary col" onclick="toggleOverlay()">Set Password</button>
+                </div>
+                <div class="col">
+                    <div class="col">
+                    <button type="button" class="btn btn-primary col" onclick="chnageThing('/videoControl')">Camera On/Off</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="container" style="margin-left: auto; margin-right: auto;">
+            <div class="row" style="margin: auto; border: 10px;">
+                <div class="col">
+                <button type="button" class="btn btn-primary col" onclick="chnageThing('/micControl')">Mute/Unmute Audio</button>
+                </div>
+                <div class="col">
+                    <div class="col">
+                    <button type="submit" class="btn btn-danger col" onclick="window.location = '/leaveMeeting'">Leave Meeting</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="overlay" id="overlay">
+            <form action="/api/setPassword" method="post">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="text" name="password" id="password">
+                    <input type="hidden" name="lobby" id="lobby" value="">
+                    <input type="submit" class="btn-primary">
+                </div>
+            </form>
+        </div>
+        <style>
+            .overlay {
+                position: absolute;
+                width: 50%;
+                z-index: 99;
+                text-align: center;
+                background-color: red;
+                border-radius: 10px;
+                font-size: 20px;
+                height: 30px;
+                opacity: 0;
+                transition: opacity .2s ease-out;
+            }
+        </style>
+    <script type="text/javascript" src="{{ url_for('static', path='/control.js') }}"></script>
     </body>
 </html>

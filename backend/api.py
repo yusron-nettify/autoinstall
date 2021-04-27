@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Request
 from fastapi.templating import Jinja2Templates
 from starlette.responses import HTMLResponse
-# from .browser import browser
+from .browser import browser
 from jinja2 import Template
 import logging
 from .models import BannerList, BasicConfig, MeetingConfig, OkResponse
@@ -59,3 +59,17 @@ async def set_bannet_list(bannerList: BannerList):
 async def get_banner_list():
     resp = browser.execute_script("return bannerList")
     return resp
+
+
+@apirouter.get("/playDefBanner")
+async def serve_def_banner():
+    data = {"List": [
+        {"img":"http://castcdn.nettify.com/beef-burger.jpg", "timer":20, "hideWelcomme": False, "useVideo": False},
+        {"img":"http://castcdn.nettify.com/nettify-explainer.mp4", "timer":0, "hideWelcomme": False, "useVideo": True},
+        {"img":"http://castcdn.nettify.com/Restaurant_promo_03.jpg", "timer":20, "hideWelcomme": False, "useVideo": False},
+        {"img":"http://castcdn.nettify.com/NettifyCast-latest.mp4", "timer":0, "hideWelcomme": False, "useVideo": True},
+        {"img":"http://castcdn.nettify.com/spa-night.jpg", "timer":20, "hideWelcomme": False, "useVideo": False}
+        ],
+     "Type": "bannerlist",
+     "app.version": "1.0.0.0" }
+    return data

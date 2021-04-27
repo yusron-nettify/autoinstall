@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+ <h1>Host an Awsome Meeting</h1>
+  <div class="container">
+    <form action="/api/startMeeting" method="POST" id="startmeet">
+      <div class="form-group">
+        <label for="mrname">Meeting Room Name: </label>
+        <input type="text" id="mrname" name="mrname" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="displayName">Display Name: </label>
+        <input type="text" id="displayName" name="displayName" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="email">Email: </label>
+        <input type="email" id="email" name="email" class="form-control">
+      </div>
+      <div>
+        <p>By clicking the "Submit" button, the form-data will be sent to a secure server.</p>
+      </div>
+      <input type="submit" value="Submit" class="btn btn-primary">
+    </form> 
+  </div>
+  <script type="text/javascript" src={{ url_for('static', path="/control.js") }}></script>
+</body>
+</html>

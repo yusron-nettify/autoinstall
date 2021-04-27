@@ -6,7 +6,7 @@ var bannerList = [{
     hideWelcomme: false, img: "https://convergence.blob.core.windows.net/captive/IDDPSMAYA/bg_4.jpg", timer: 10, useVideo: false
 }];
 
-var banner = fetch("http://localhost:8000/api/bannerList")
+var banner = fetch("http://localhost:8000/api/playDefBanner")
 .then(response => response.json())
 .then(res => bannerList = res["List"])
 
